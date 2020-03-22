@@ -9,10 +9,13 @@ export class TreeDataProvider implements vscode.TreeDataProvider<TreeItem> {
     private _onDidChangeTreeData: vscode.EventEmitter<any> = new vscode.EventEmitter<any>();
     readonly onDidChangeTreeData: vscode.Event<any> = this._onDidChangeTreeData.event;
 
+    /** TreeView data */
     data: TreeItem[] = [];
 
+    /** Data level flag */
     dataLevel: DataLevel;
 
+    /** covid-tracking API */
     API_URL = 'https://coronavirus-tracker-api.herokuapp.com/v2';
 
     constructor(dataLevel: DataLevel) {
@@ -24,8 +27,8 @@ export class TreeDataProvider implements vscode.TreeDataProvider<TreeItem> {
         this.sendRequest().then(response => this.handleResponse(response.data));
     }
 
-    sortStatsByCountryName(data: CountryData[]): CountryData[] {
-        return data.sort((a, b) => a.country.localeCompare(b.country));
+    sortStatsByKey(data: CountryData[], sortKey: string): CountryData[] {
+        return data.sort((a, b) => a[sortKey].localeCompare(b[sortKey]));
     }
 
     handleResponse(response: ResponseData): void {
@@ -33,7 +36,7 @@ export class TreeDataProvider implements vscode.TreeDataProvider<TreeItem> {
             this.populateWorldStats(response.latest);
         } else if (this.dataLevel === 'COUNTRIES') {
             // sort alphabetically
-            const countriesData = this.sortStatsByCountryName(response.locations);
+            const countriesData = this.sortStatsByKey(response.locations, 'country');
             // group data by countries (incl. provinces)
             const groupedByCountry = this.groupByCountries(countriesData);
             // populate tree view
@@ -62,7 +65,8 @@ export class TreeDataProvider implements vscode.TreeDataProvider<TreeItem> {
         });
     }
 
-    getProvinceData(data: CountryData[]): any {
+    getProvinceData(data: CountryData[]): TreeItem[] {
+        data = this.sortStatsByKey(data, 'province');
         return data.map(countryItem => new TreeItem(countryItem.province, this.createTreeItem(countryItem.latest)));
     }
 
@@ -98,11 +102,11 @@ export class TreeDataProvider implements vscode.TreeDataProvider<TreeItem> {
         return element.children;
     }
 
-    refreshView(): any {
+    refreshView(): void {
         this._onDidChangeTreeData.fire();
     }
 
-    refreshData(): any {
+    refreshData(): void {
         this.data = [];
         this.refreshView();
         this.fetchData();
