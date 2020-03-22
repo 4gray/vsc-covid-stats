@@ -5,7 +5,7 @@
 A simple VSCode extension based on [TreeView-API](https://code.visualstudio.com/api/extension-guides/tree-view) and [coronavirus-tracker (API)](https://icon-icons.com/de/symbol/Virus-coronavirus-covid-19-covid19/134782).
 
 
-Thanks to:
+## Credits:
 * [coronavirus-tracker (API)](https://icon-icons.com/de/symbol/Virus-coronavirus-covid-19-covid19/134782)
 * [covid 19 icon](https://icon-icons.com/de/symbol/Virus-coronavirus-covid-19-covid19/134782)
 
