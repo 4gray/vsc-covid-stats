@@ -1,0 +1,91 @@
+{
+    "name": "vsc-covid-stats",
+    "displayName": "COVID-19 Statistics",
+    "description": "Coronavirus tracker in VSCode sidebar",
+    "version": "0.0.1",
+    "publisher": "4gray",
+    "engines": {
+        "vscode": "^1.42.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "keywords": [
+        "covid",
+        "corona",
+        "virus",
+        "sidebar"
+    ],
+    "activationEvents": [
+        "onView:covid-stats",
+        "onView:worldwide-stats",
+        "onView:countries-stats"
+    ],
+    "homepage": "https://4gray.github.io/vsc-covid-stats",
+    "galleryBanner": {
+        "color": "#b52e31",
+        "theme": "dark"
+    },
+    "icon": "media/dep.png",
+    "main": "./out/extension.js",
+    "contributes": {
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "covid-stats",
+                    "title": "Covid-19 Stats",
+                    "icon": "media/dep.svg"
+                }
+            ]
+        },
+        "views": {
+            "covid-stats": [
+                {
+                    "id": "worldwide-stats",
+                    "name": "Worldwide"
+                },
+                {
+                    "id": "countries-stats",
+                    "name": "Countries"
+                }
+            ]
+        },
+        "commands": [
+            {
+                "command": "countries-stats.refreshEntry",
+                "title": "Refresh",
+                "icon": {
+                    "light": "resources/light/refresh.svg",
+                    "dark": "resources/dark/refresh.svg"
+                }
+            }
+        ],
+        "menus": {
+            "view/title": [
+                {
+                    "command": "countries-stats.refreshEntry",
+                    "group": "navigation"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "package": "vsce package"
+    },
+    "devDependencies": {
+        "@types/node": "^10.12.21",
+        "@types/vscode": "^1.42.0",
+        "typescript": "^3.5.1",
+        "tslint": "^5.12.1"
+    },
+    "dependencies": {
+        "axios": "^0.19.2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/4gray/vsc-covid-stats"
+    }
+}

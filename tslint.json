@@ -1,0 +1,8 @@
+{
+    "rules": {
+        "indent": [true, "spaces"],
+        "semicolon": [true, "always"],
+        "typedef": [true, "call-signature", "parameter"],
+        "ordered-imports": [true]
+    }
+}
