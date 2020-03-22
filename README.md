@@ -2,11 +2,11 @@
 
 ![covid extension](https://raw.githubusercontent.com/4gray/vsc-covid-stats/master/resources/screenshot.png)
 
-A simple VSCode extension based on [TreeView-API](https://code.visualstudio.com/api/extension-guides/tree-view) and [coronavirus-tracker (API)](https://icon-icons.com/de/symbol/Virus-coronavirus-covid-19-covid19/134782).
+A simple VSCode extension based on [TreeView-API](https://code.visualstudio.com/api/extension-guides/tree-view) and [coronavirus-tracker (API)](https://github.com/ExpDev07/coronavirus-tracker-api).
 
 
 ## Credits:
-* [coronavirus-tracker (API)](https://icon-icons.com/de/symbol/Virus-coronavirus-covid-19-covid19/134782)
+* [coronavirus-tracker (API)](https://github.com/ExpDev07/coronavirus-tracker-api)
 * [covid 19 icon](https://icon-icons.com/de/symbol/Virus-coronavirus-covid-19-covid19/134782)
 
 
