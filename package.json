@@ -2,7 +2,7 @@
     "name": "vsc-covid-stats",
     "displayName": "COVID-19 Statistics",
     "description": "Coronavirus tracker in VSCode sidebar",
-    "version": "0.0.2",
+    "version": "0.1.0",
     "publisher": "4gray",
     "engines": {
         "vscode": "^1.42.0"
