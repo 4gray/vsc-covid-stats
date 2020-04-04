@@ -45,6 +45,10 @@
                     "name": "Worldwide"
                 },
                 {
+                    "id": "pinned-stats",
+                    "name": "Pinned Countries"
+                },
+                {
                     "id": "countries-stats",
                     "name": "Countries"
                 }
@@ -58,15 +62,88 @@
                     "light": "resources/light/refresh.svg",
                     "dark": "resources/dark/refresh.svg"
                 }
+            },
+            {
+                "command": "pinned-stats.refreshEntry",
+                "title": "Refresh",
+                "icon": {
+                    "light": "resources/light/refresh.svg",
+                    "dark": "resources/dark/refresh.svg"
+                }
+            },
+            {
+                "command": "worldwide-stats.refreshEntry",
+                "title": "Refresh",
+                "icon": {
+                    "light": "resources/light/refresh.svg",
+                    "dark": "resources/dark/refresh.svg"
+                }
+            },
+            {
+                "command": "covid.pin-country",
+                "title": "Pin/unpin country",
+                "icon": {
+                    "light": "resources/light/pin.svg",
+                    "dark": "resources/dark/pin.svg"
+                }
+            },
+            {
+                "command": "covid.unpin-country",
+                "title": "Unpin country",
+                "icon": {
+                    "light": "resources/light/remove.svg",
+                    "dark": "resources/dark/remove.svg"
+                }
             }
         ],
         "menus": {
             "view/title": [
                 {
                     "command": "countries-stats.refreshEntry",
+                    "when": "view == countries-stats",
+                    "group": "navigation"
+                },
+                {
+                    "command": "pinned-stats.refreshEntry",
+                    "when": "view == pinned-stats",
+                    "group": "navigation"
+                },
+                {
+                    "command": "worldwide-stats.refreshEntry",
+                    "when": "view == worldwide-stats",
                     "group": "navigation"
                 }
+            ],
+            "view/item/context": [
+                {
+                    "command": "covid.pin-country",
+                    "when": "viewItem == pin",
+                    "group": "inline"
+                },
+                {
+                    "command": "covid.unpin-country",
+                    "when": "viewItem == unpin",
+                    "group": "inline"
+                }
             ]
+        },
+        "configuration": {
+            "type": "object",
+            "title": "Covid-19 Stats Configuration",
+            "properties": {
+                "vsc-covid-stats.pinned-countries": {
+                    "type": "array",
+                    "default": [
+                        "china",
+                        "italy",
+                        "spain",
+                        "germany",
+                        "russia",
+                        "usa"
+                    ],
+                    "description": "Pinned countries"
+                }
+            }
         }
     },
     "scripts": {
