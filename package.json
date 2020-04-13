@@ -19,7 +19,8 @@
     "activationEvents": [
         "onView:covid-stats",
         "onView:worldwide-stats",
-        "onView:countries-stats"
+        "onView:countries-stats",
+        "onCommand:covid.show-map"
     ],
     "homepage": "https://4gray.github.io/vsc-covid-stats",
     "galleryBanner": {
@@ -27,7 +28,7 @@
         "theme": "dark"
     },
     "icon": "media/dep.png",
-    "main": "./out/extension.js",
+    "main": "./dist/extension.js",
     "contributes": {
         "viewsContainers": {
             "activitybar": [
@@ -80,6 +81,14 @@
                 }
             },
             {
+                "command": "covid.show-on-map",
+                "title": "Show data on map",
+                "icon": {
+                    "light": "resources/light/globe.svg",
+                    "dark": "resources/dark/globe.svg"
+                }
+            },
+            {
                 "command": "covid.pin-country",
                 "title": "Pin/unpin country",
                 "icon": {
@@ -94,6 +103,11 @@
                     "light": "resources/light/remove.svg",
                     "dark": "resources/dark/remove.svg"
                 }
+            },
+            {
+                "command": "covid.show-map",
+                "title": "Show World Map",
+                "category": "Covid Stats"
             }
         ],
         "menus": {
@@ -116,12 +130,22 @@
             ],
             "view/item/context": [
                 {
+                    "command": "covid.show-on-map",
+                    "when": "viewItem == pin",
+                    "group": "inline"
+                },
+                {
                     "command": "covid.pin-country",
                     "when": "viewItem == pin",
                     "group": "inline"
                 },
                 {
                     "command": "covid.unpin-country",
+                    "when": "viewItem == unpin",
+                    "group": "inline"
+                },
+                {
+                    "command": "covid.show-on-map",
                     "when": "viewItem == unpin",
                     "group": "inline"
                 }
@@ -147,19 +171,55 @@
         }
     },
     "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
+        "vscode:prepublish": "npm run build && tsc -p tsconfig.extension.json",
+        "start": "ng serve",
+        "build": "ng build --prod --output-hashing none && tsc -p tsconfig.extension.json",
+        "compile": "tsc -p tsconfig.extension.json",
+        "watch": "tsc -watch -p tsconfig.extension.json",
+        "test": "ng test",
+        "lint": "ng lint",
         "package": "vsce package"
     },
-    "devDependencies": {
-        "@types/node": "^10.12.21",
-        "@types/vscode": "^1.42.0",
-        "typescript": "^3.5.1",
-        "tslint": "^5.12.1"
-    },
     "dependencies": {
-        "axios": "^0.19.2"
+        "@angular/animations": "^9.1.1",
+        "@angular/common": "^9.1.1",
+        "@angular/compiler": "^9.1.1",
+        "@angular/core": "^9.1.1",
+        "@angular/forms": "^9.1.1",
+        "@angular/platform-browser": "^9.1.1",
+        "@angular/platform-browser-dynamic": "^9.1.1",
+        "@angular/router": "^9.1.1",
+        "@asymmetrik/ngx-leaflet": "^6.0.1",
+        "@types/leaflet": "^1.5.12",
+        "axios": "^0.19.2",
+        "leaflet": "^1.6.0",
+        "rxjs": "~6.5.5",
+        "tslib": "^1.10.0",
+        "vscode-test": "^1.3.0",
+        "zone.js": "~0.10.2"
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "~0.901.1",
+        "@angular/cli": "^9.1.1",
+        "@angular/compiler-cli": "^9.1.1",
+        "@angular/language-service": "^9.1.1",
+        "@types/jasmine": "~3.3.8",
+        "@types/jasminewd2": "^2.0.8",
+        "@types/node": "^12.11.1",
+        "@types/vscode": "^1.41.0",
+        "codelyzer": "^5.1.2",
+        "jasmine-core": "~3.4.0",
+        "jasmine-spec-reporter": "~4.2.1",
+        "karma": "~4.1.0",
+        "karma-chrome-launcher": "~2.2.0",
+        "karma-coverage-istanbul-reporter": "~2.0.1",
+        "karma-jasmine": "~2.0.1",
+        "karma-jasmine-html-reporter": "^1.5.1",
+        "protractor": "~5.4.0",
+        "ts-node": "~7.0.0",
+        "tslint": "~5.15.0",
+        "typescript": "~3.8.3",
+        "vsce": "^1.71.0"
     },
     "repository": {
         "type": "git",

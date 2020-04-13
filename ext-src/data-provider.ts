@@ -24,6 +24,9 @@ export class TreeDataProvider implements vscode.TreeDataProvider<TreeItem> {
     /** Array from extension configs with pinned countries */
     pinnedCountries: string[];
 
+    // group data by countries (incl. provinces)
+    groupedByCountry: any = {};
+
     constructor(dataLevel: DataLevel, pinned?: string[]) {
         this.dataLevel = dataLevel;
         this.fetchData();
@@ -49,18 +52,16 @@ export class TreeDataProvider implements vscode.TreeDataProvider<TreeItem> {
         } else {
             // sort alphabetically
             const countriesData = this.sortStatsByKey(response.locations, 'country');
-            // group data by countries (incl. provinces)
-            let groupedByCountry;
             if (this.dataLevel === 'PINNED') {
                 const filteredCountries = response.locations.filter(countryItem =>
                     this.pinnedCountries.includes(countryItem.country.toLowerCase()),
                 );
-                groupedByCountry = this.groupByCountries(filteredCountries);
+                this.groupedByCountry = this.groupByCountries(filteredCountries);
             } else if (this.dataLevel === 'COUNTRIES') {
-                groupedByCountry = this.groupByCountries(countriesData);
+                this.groupedByCountry = this.groupByCountries(countriesData);
             }
             // populate tree view
-            this.populateCountriesStats(groupedByCountry);
+            this.populateCountriesStats(this.groupedByCountry);
         }
 
         // refresh view after data handling was done
@@ -206,5 +207,9 @@ export class TreeDataProvider implements vscode.TreeDataProvider<TreeItem> {
     updateConfigByKey(key: string, value: any): void {
         const configuration = workspace.getConfiguration(EXTENSION_ID);
         configuration.update(key, value, ConfigurationTarget.Global);
+    }
+
+    getCountryDetails(country: string): any {
+        return this.groupedByCountry[country][0];
     }
 }
