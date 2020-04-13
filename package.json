@@ -178,7 +178,8 @@
         "watch": "tsc -watch -p tsconfig.extension.json",
         "test": "ng test",
         "lint": "ng lint",
-        "package": "vsce package"
+        "package": "vsce package",
+        "build-and-deploy": "ng build --prod --base-href '/vsc-covid-stats/'"
     },
     "dependencies": {
         "@angular/animations": "^9.1.1",
