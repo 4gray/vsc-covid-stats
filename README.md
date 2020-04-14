@@ -8,7 +8,16 @@ A simple VSCode extension based on [TreeView-API](https://code.visualstudio.com/
 ## Credits:
 * [coronavirus-tracker (API)](https://github.com/ExpDev07/coronavirus-tracker-api)
 * [covid 19 icon](https://icon-icons.com/de/symbol/Virus-coronavirus-covid-19-covid19/134782)
+* WebView application based on [Angular](https://angular.io/) framework
+* [Leaflet](http://leafletjs.com/) and [ngx-leaflet](https://github.com/Asymmetrik/ngx-leaflet) library for map visualization
 
+## Changelog
+* v0.2.0
+  * add WebView with map visualization
+* v0.1.0
+  * add TreeView panel with pinned countries
+* v0.0.1
+  * first version
 
 **Stay strong, stay healthy!**
 
