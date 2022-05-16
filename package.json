@@ -192,7 +192,7 @@
         "@angular/router": "^9.1.1",
         "@asymmetrik/ngx-leaflet": "^6.0.1",
         "@types/leaflet": "^1.5.12",
-        "axios": "^0.21.1",
+        "axios": "^0.21.2",
         "leaflet": "^1.6.0",
         "rxjs": "~6.5.5",
         "tslib": "^1.10.0",
